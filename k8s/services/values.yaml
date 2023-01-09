@@ -1,0 +1,40 @@
+gateway-service:
+  service:
+    port: 8080
+    image:
+      name: {{ env.GATEWAY_SERVICE_IMAGE }}
+      version: "1.0"
+    isGateway: true
+
+library-system:
+  service:
+    port: 8060
+    image:
+      name: {{ env.LIBRARY_SYSTEM_IMAGE }}
+      version: "1.0"
+    database:
+      name: libraries
+      username: program
+      password: test
+
+rating-system:
+  service:
+    port: 8050
+    image:
+      name: {{ env.RATING_SYSTEM_IMAGE }}
+      version: "1.0"
+    database:
+      name: ratings
+      username: program
+      password: test
+
+reservation-system:
+  service:
+    port: 8070
+    image:
+      name: {{ env.RESERVATION_SYSTEM_IMAGE }}
+      version: "1.0"
+    database:
+      name: reservations
+      username: program
+      password: test
