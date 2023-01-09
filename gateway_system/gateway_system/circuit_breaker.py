@@ -6,7 +6,7 @@ from typing import Awaitable
 
 from httpx import ConnectTimeout, Response
 
-from gateway_service.config import CIRCUIT_BREAKER_CONFIG
+from gateway_system.config import CIRCUIT_BREAKER_CONFIG
 
 logger = logging.getLogger(__name__)
 

@@ -4,8 +4,8 @@ from uuid import UUID
 
 from pydantic import BaseModel
 
-from gateway_service.apis.library_system_api.schemas import BookModel, Condition, LibraryModel
-from gateway_service.apis.rating_system_api.schemas import UserRating
+from gateway_system.apis.library_system_api.schemas import BookModel, Condition, LibraryModel
+from gateway_system.apis.rating_system_api.schemas import UserRating
 
 
 class Status(Enum):

@@ -5,7 +5,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, Header, Response, status
 
-from gateway_service.apis import (
+from gateway_system.apis import (
     LibrarySystemAPI,
     RatingSystemAPI,
     ReservationSystemAPI,
@@ -13,9 +13,9 @@ from gateway_service.apis import (
     get_rating_system_api,
     get_reservation_system_api,
 )
-from gateway_service.apis.library_system_api.schemas import BookModel, BooksPagination, Condition, LibrariesPagination
-from gateway_service.apis.rating_system_api.schemas import UserRating
-from gateway_service.apis.reservation_system.schemas import (
+from gateway_system.apis.library_system_api.schemas import BookModel, BooksPagination, Condition, LibrariesPagination
+from gateway_system.apis.rating_system_api.schemas import UserRating
+from gateway_system.apis.reservation_system.schemas import (
     RentedBooks,
     ReservationBookInput,
     ReservationBookResponse,
@@ -25,9 +25,9 @@ from gateway_service.apis.reservation_system.schemas import (
     ReturnBookInput,
     Status,
 )
-from gateway_service.exceptions import ServiceNotAvailableError, ServiceTemporaryNotAvailableError
-from gateway_service.queue_processor import Func, get_queue
-from gateway_service.validators import validate_page_size_params
+from gateway_system.exceptions import ServiceNotAvailableError, ServiceTemporaryNotAvailableError
+from gateway_system.queue_processor import Func, get_queue
+from gateway_system.validators import validate_page_size_params
 
 logger = logging.getLogger(__name__)
 

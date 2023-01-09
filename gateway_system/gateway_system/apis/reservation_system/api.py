@@ -3,16 +3,16 @@ from uuid import UUID
 
 from httpx import AsyncClient, Response
 
-from gateway_service.apis.reservation_system.schemas import (
+from gateway_system.apis.reservation_system.schemas import (
     RentedBooks,
     ReservationBookInput,
     ReservationModel,
     ReservationUpdate,
 )
-from gateway_service.circuit_breaker import CircuitBreaker
-from gateway_service.config import RESERVATION_SYSTEM_CONFIG
-from gateway_service.exceptions import ServiceNotAvailableError
-from gateway_service.validators import json_dump
+from gateway_system.circuit_breaker import CircuitBreaker
+from gateway_system.config import RESERVATION_SYSTEM_CONFIG
+from gateway_system.exceptions import ServiceNotAvailableError
+from gateway_system.validators import json_dump
 
 
 class ReservationSystemAPI:

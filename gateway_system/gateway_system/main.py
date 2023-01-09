@@ -7,10 +7,10 @@ import uvicorn
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 
-from gateway_service import cancel_and_stop_task
-from gateway_service.exceptions import ServiceNotAvailableError
-from gateway_service.queue_processor import QUEUE, queue_processor
-from gateway_service.routers import router
+from gateway_system import cancel_and_stop_task
+from gateway_system.exceptions import ServiceNotAvailableError
+from gateway_system.queue_processor import QUEUE, queue_processor
+from gateway_system.routers import router
 
 logger = logging.getLogger(__name__)
 

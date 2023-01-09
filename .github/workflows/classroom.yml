@@ -8,10 +8,10 @@ on:
       - master
 
 env:
-  GATEWAY_SERVICE_IMAGE: puzanovim/gateway_service:1.0
-  LIBRARY_SYSTEM_IMAGE: puzanovim/library_system:1.0
-  RATING_SYSTEM_IMAGE: puzanovim/rating_system:1.0
-  RESERVATION_SYSTEM_IMAGE: puzanovim/reservation_system:1.0
+  GATEWAY_SERVICE_IMAGE: puzanovim/gateway_system:v2
+  LIBRARY_SYSTEM_IMAGE: puzanovim/library_system:v1
+  RATING_SYSTEM_IMAGE: puzanovim/rating_system:v1
+  RESERVATION_SYSTEM_IMAGE: puzanovim/reservation_system:v1
 
 jobs:
   build:
@@ -32,7 +32,7 @@ jobs:
 
       - name: Build and push services
         run: |
-          docker build -t ${{ env.GATEWAY_SERVICE_IMAGE }} gateway_service && docker push ${{ env.GATEWAY_SERVICE_IMAGE }}
+          docker build -t ${{ env.GATEWAY_SERVICE_IMAGE }} gateway_system && docker push ${{ env.GATEWAY_SERVICE_IMAGE }}
           docker build -t ${{ env.LIBRARY_SYSTEM_IMAGE }} library_system && docker push ${{ env.LIBRARY_SYSTEM_IMAGE }}
           docker build -t ${{ env.RATING_SYSTEM_IMAGE }} rating_system && docker push ${{ env.RATING_SYSTEM_IMAGE }}
           docker build -t ${{ env.RESERVATION_SYSTEM_IMAGE }} reservation_system && docker push ${{ env.RESERVATION_SYSTEM_IMAGE }}

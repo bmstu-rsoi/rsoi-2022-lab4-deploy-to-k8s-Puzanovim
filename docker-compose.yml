@@ -25,8 +25,9 @@ services:
     depends_on:
       - postgres
 
-  gateway_service:
-    image: {{ env.GATEWAY_SERVICE_IMAGE }}
+  gateway_system:
+    image: puzanovim/gateway_system:v2
+    container_name: gateway
     restart: always
     ports:
       - "8080:8080"
@@ -36,7 +37,8 @@ services:
       - reservation_system
 
   library_system:
-    image: {{ env.LIBRARY_SYSTEM_IMAGE }}
+    image: puzanovim/library_system:v1
+    container_name: library
     restart: always
     ports:
       - "8060:8060"
@@ -44,7 +46,8 @@ services:
       - postgres
 
   rating_system:
-    image: {{ env.RATING_SYSTEM_IMAGE }}
+    image: puzanovim/rating_system:v1
+    container_name: rating
     restart: always
     ports:
       - "8050:8050"
@@ -52,7 +55,8 @@ services:
       - postgres
 
   reservation_system:
-    image: {{ env.RESERVATION_SYSTEM_IMAGE }}
+    image: puzanovim/reservation_system:v1
+    container_name: reservation
     restart: always
     ports:
       - "8070:8070"

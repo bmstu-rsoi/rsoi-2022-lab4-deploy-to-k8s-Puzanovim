@@ -1,10 +1,10 @@
 from httpx import AsyncClient, Response
 
-from gateway_service.apis.rating_system_api.schemas import UserRating
-from gateway_service.circuit_breaker import CircuitBreaker
-from gateway_service.config import RATING_SYSTEM_CONFIG
-from gateway_service.exceptions import ServiceNotAvailableError
-from gateway_service.validators import json_dump
+from gateway_system.apis.rating_system_api.schemas import UserRating
+from gateway_system.circuit_breaker import CircuitBreaker
+from gateway_system.config import RATING_SYSTEM_CONFIG
+from gateway_system.exceptions import ServiceNotAvailableError
+from gateway_system.validators import json_dump
 
 
 class RatingSystemAPI:

@@ -15,10 +15,10 @@ ENV ROOT_DIR /app
 
 WORKDIR $ROOT_DIR
 
-COPY gateway_service $ROOT_DIR/gateway_service
+COPY gateway_system $ROOT_DIR/gateway_system
 
 # ------------ final -----------------------
 
 FROM stage0 as final
 
-CMD ["python3", "-m", "gateway_service.main"]
+CMD ["python3", "-m", "gateway_system.main"]

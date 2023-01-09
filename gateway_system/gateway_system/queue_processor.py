@@ -4,8 +4,8 @@ from typing import Callable, Tuple
 
 from pydantic import BaseModel
 
-from gateway_service import run_forever
-from gateway_service.exceptions import ServiceNotAvailableError, ServiceTemporaryNotAvailableError
+from gateway_system import run_forever
+from gateway_system.exceptions import ServiceNotAvailableError, ServiceTemporaryNotAvailableError
 
 logger = logging.getLogger(__name__)
 
