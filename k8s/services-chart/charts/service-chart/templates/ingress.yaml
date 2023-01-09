@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/part-of: micro-services
     app.kubernetes.io/managed-by: helm
 spec:
-{{/* ingressClassName: nginx*/}}
+  {{/* ingressClassName: nginxlh */}}
   rules:
     - host: {{ .Chart.Name }}.{{ .Values.domain }}
       http:
@@ -18,6 +18,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ .Chart.Name }}
+                name: {{ .Chart.Name }}-service
                 port:
                   number: {{ .Values.service.port }}

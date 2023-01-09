@@ -8,10 +8,10 @@ on:
       - master
 
 env:
-  GATEWAY_SERVICE_IMAGE: puzanovim/gateway_service:${{ github.sha }}
-  LIBRARY_SYSTEM_IMAGE: puzanovim/library_system:${{ github.sha }}
-  RATING_SYSTEM_IMAGE: puzanovim/rating_system:${{ github.sha }}
-  RESERVATION_SYSTEM_IMAGE: puzanovim/reservation_system:${{ github.sha }}
+  GATEWAY_SERVICE_IMAGE: puzanovim/gateway_service:1.0
+  LIBRARY_SYSTEM_IMAGE: puzanovim/library_system:1.0
+  RATING_SYSTEM_IMAGE: puzanovim/rating_system:1.0
+  RESERVATION_SYSTEM_IMAGE: puzanovim/reservation_system:1.0
 
 jobs:
   build:
@@ -45,7 +45,7 @@ jobs:
           kubectl config use-context default
                
           cd k8s
-          helm upgrade services ./services          
+          helm upgrade services ./services-chart         
           sleep 60
 
       - name: Run API Tests

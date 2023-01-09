@@ -26,19 +26,28 @@ spec:
       containers:
         - name: {{ .Chart.Name}}
           imagePullPolicy: Always
-          image: "{{ .Values.service.image.name }}:{{ .Values.service.image.version }}"
+          image: {{ .Values.service.image.name }}:{{ .Values.service.image.version }}
+
+          resources:
+            requests:
+              memory: "{{ .Values.service.resources.requests.memory }}"
+              cpu: "{{ .Values.service.resources.requests.cpu }}"
+            limits:
+              memory: "{{ .Values.service.resources.limits.memory }}"
+              cpu: "{{ .Values.service.resources.limits.cpu }}"
 
           env:
-            {{ if .Values.service.database.name }}
-            - name: DATABASE_URL
-              value: "Host={{ .Values.service.database.host }};User ID={{ .Values.service.database.username }};Password={{ .Values.service.database.password }};Port={{ .Values.service.database.port }};Database={{ .Values.service.database.name }};"
-            {{- end }}
-            - name: "PORT"
-              value: {{ .Values.service.port | quote }}
-            {{- range $key, $value := .Values.service.enviroments }}
-            - name: {{ $key }}
-              value: {{ $value | quote }}
-            {{- end }}
+            - name: DB_NAME
+              value: "{{ .Values.service.database.name }}"
+            - name: DB_HOST
+              value: "{{ .Values.service.database.host }}"
+            - name: DB_PORT
+              value: "{{ .Values.service.database.port }}"
+            - name: DB_USER
+              value: "{{ .Values.service.database.username }}"
+            - name: DB_PASS
+              value: "{{ .Values.service.database.password }}"
+
           ports:
             - name: web
               containerPort: {{ .Values.service.port }}

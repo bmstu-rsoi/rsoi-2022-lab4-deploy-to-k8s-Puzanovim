@@ -11,16 +11,10 @@ metadata:
 data:
   10-create-user-and-dbs.sql: |
     {{- range $user := .Values.users }}
-    do
-    $$
-    begin
-      if not exists (select * from pg_user where username = '{{ $user.name }}') then
-        create role {{ $user.name }} password '{{ $user.password }}';
-        ALTER ROLE {{ $user.name }} WITH LOGIN;
-      end if;
-    end
-    $$;
+    CREATE ROLE {{ $user.name }} WITH PASSWORD '{{ $user.password }}';
+    ALTER ROLE {{ $user.name }} WITH LOGIN;
     {{- end }}
+
     {{- range $database := .Values.databases }}
     CREATE DATABASE {{ $database.name }};
     GRANT ALL PRIVILEGES ON DATABASE {{ $database.name }} TO {{ $database.user }};

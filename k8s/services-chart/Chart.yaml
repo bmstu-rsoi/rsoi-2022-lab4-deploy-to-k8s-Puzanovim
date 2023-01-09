@@ -1,20 +1,17 @@
 apiVersion: v2
-name: services
+name: services-chart
 type: application
 version: 1.0.0
 dependencies:
   - name: service-chart
     version: 1.0.0
-    alias: gateway-service
-
+    alias: gateway
   - name: service-chart
     version: 1.0.0
-    alias: library-system
-
+    alias: library
   - name: service-chart
     version: 1.0.0
-    alias: rating-system
-
+    alias: rating
   - name: service-chart
     version: 1.0.0
-    alias: reservation-system
+    alias: reservation
