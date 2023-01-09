@@ -26,8 +26,7 @@ services:
       - postgres
 
   gateway_service:
-    build: gateway_service
-    container_name: gateway_service
+    image: {{ env.GATEWAY_SERVICE_IMAGE }}
     restart: always
     ports:
       - "8080:8080"
@@ -37,8 +36,7 @@ services:
       - reservation_system
 
   library_system:
-    build: library_system
-    container_name: library_system
+    image: {{ env.LIBRARY_SYSTEM_IMAGE }}
     restart: always
     ports:
       - "8060:8060"
@@ -46,8 +44,7 @@ services:
       - postgres
 
   rating_system:
-    build: rating_system
-    container_name: rating_system
+    image: {{ env.RATING_SYSTEM_IMAGE }}
     restart: always
     ports:
       - "8050:8050"
@@ -55,8 +52,7 @@ services:
       - postgres
 
   reservation_system:
-    build: reservation_system
-    container_name: reservation_system
+    image: {{ env.RESERVATION_SYSTEM_IMAGE }}
     restart: always
     ports:
       - "8070:8070"

@@ -6,6 +6,13 @@ on:
   pull_request:
     branches:
       - master
+
+env:
+  GATEWAY_SERVICE_IMAGE: puzanovim/gateway_service:${{ github.sha }}
+  LIBRARY_SYSTEM_IMAGE: puzanovim/library_system:${{ github.sha }}
+  RATING_SYSTEM_IMAGE: puzanovim/rating_system:${{ github.sha }}
+  RESERVATION_SYSTEM_IMAGE: puzanovim/reservation_system:${{ github.sha }}
+
 jobs:
   build:
     name: Autograding
@@ -25,12 +32,32 @@ jobs:
 
       - name: Build and push services
         run: |
-          docker build -t puzanovim/gateway_service gateway_service && docker push puzanovim/gateway_service
-          docker build -t puzanovim/library_system library_system && docker push puzanovim/library_system
-          docker build -t puzanovim/rating_system rating_system && docker push puzanovim/rating_system
-          docker build -t puzanovim/reservation_system reservation_system && docker push puzanovim/reservation_system
+          docker build -t ${{ env.GATEWAY_SERVICE_IMAGE }} gateway_service && docker push ${{ env.GATEWAY_SERVICE_IMAGE }}
+          docker build -t ${{ env.LIBRARY_SYSTEM_IMAGE }} library_system && docker push ${{ env.LIBRARY_SYSTEM_IMAGE }}
+          docker build -t ${{ env.RATING_SYSTEM_IMAGE }} rating_system && docker push ${{ env.RATING_SYSTEM_IMAGE }}
+          docker build -t ${{ env.RESERVATION_SYSTEM_IMAGE }} reservation_system && docker push ${{ env.RESERVATION_SYSTEM_IMAGE }}
 
-      # TODO build, publish to docker hub, deploy to k8s
+      - name: Deploy COI VM
+        id: deploy-coi
+        uses: yc-actions/yc-coi-deploy@v1
+        env:
+          GATEWAY_SERVICE_IMAGE: ${{ env.GATEWAY_SERVICE_IMAGE }}
+          LIBRARY_SYSTEM_IMAGE: ${{ env.LIBRARY_SYSTEM_IMAGE }}
+          RATING_SYSTEM_IMAGE: ${{ env.RATING_SYSTEM_IMAGE }}
+          RESERVATION_SYSTEM_IMAGE: ${{ env.RESERVATION_SYSTEM_IMAGE }}
+          YC_VM_SSH: ${{ secrets.YC_VM_SSH }}
+          YC_VM_USERNAME: ${{ secrets.YC_VM_USERNAME }}
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          folder-id: ${{ secrets.YC_FOLDER_ID }}
+          VM-name: ${{ secrets.YC_VM_NAME }}
+          vm-service-account-id: ${{ secrets.YC_SERVICE_ACCOUNT_ID }}
+          vm-cores: 1
+          vm-memory: 512Mb
+          vm-core-fraction: 100
+          vm-subnet-id: ${{ secrets.YC_SUBNET_ID }}
+          user-data-path: './user-data.yaml'
+          docker-compose-path: './docker-compose.yml'
 
       - name: Run API Tests
         uses: matt-ball/newman-action@master
